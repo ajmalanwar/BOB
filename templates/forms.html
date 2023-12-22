@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forms</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/googleapis.css' %}">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+</head>
+
+{% block content %}
+<body>
+<div class="container21">
+  <div id="my_form">
+        <form class="container1" action="{% url 'form' %}" method="post">
+
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <p style="align-items:center;"> {{ message }}</p><br>
+        <a href="{% url 'home' %}" class="btn btn-danger">Home</a>
+
+
+        {% endfor %}
+      </ul>
+    {% else %}
+
+      <h3 style="color:red; text-align: center;">Fill Up The Form</h3>
+      {% csrf_token %}
+      {% for field in form %}
+        <label class="form-label">{{ field.label }}</label>
+        {{ field }}
+        <br>
+      {% endfor %}
+      {{ form.errors }}
+      <div style="text-align: center;">
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+    </form>
+
+    {% endif %}
+
+<script>
+     function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim(); // Using native JavaScript trim
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+    }
+
+
+    var csrftoken = getCookie('csrftoken');
+
+
+
+
+    let district_field = document.getElementById("id_district")
+    let branch_field = document.getElementById("id_branch")
+    district_field.addEventListener("change",getDistrictId)
+
+    function getDistrictId(e){
+        console.log(e.target.value)
+        let district_id=e.target.value
+
+        const data = { id: district_id };
+
+
+        let url = "{% url 'branches' %}"
+
+
+        fetch(url, {
+            method: "POST", // or 'PUT'
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrftoken
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+
+        .then(data => {
+            console.log("Success:", data);
+            branch_field.innerHTML = '<option value selected>---------</option>';
+            for(let i = 0; i < data.length; i++){
+                branch_field.innerHTML += `<option value="${data[i]["id"]}">${data[i]["name"]}</option>`;
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+    }
+
+
+
+
+</script>
+  </div>
+</div>
+</body>
+{% endblock %}
+</html>

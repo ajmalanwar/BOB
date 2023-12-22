@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Application Accepted</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #4CAF50, #FFC107); /* Dual color background */
+      color: #fff;
+    }
+
+    .container {
+      padding: 50px;
+    }
+
+    .message {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #4CAF50;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: #FFC107;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="message">
+      Your form application has been accepted. Our bank will contact you shortly.
+    </div>
+    <a href="home.html" class="button">Home</a>
+    <button class="button" onclick="changeColor()">Explore</button>
+  </div>
+
+  <script>
+    function changeColor() {
+      var body = document.querySelector('body');
+      body.style.background = body.style.background === 'linear-gradient(to right, #4CAF50, #FFC107)' ? 'linear-gradient(to right, #FFC107, #4CAF50)' : 'linear-gradient(to right, #4CAF50, #FFC107)';
+    }
+  </script>
+</body>
+</html>

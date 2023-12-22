@@ -1,0 +1,46 @@
+
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">B O B</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Branches
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Thiruvananthapuram">Thiruvananthapuram</a>
+          <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Kollam">Kollam</a>
+          <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Ernakulam">Ernakulam</a>
+          <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Kozhikode">Kozhikode</a>
+          <a class="dropdown-item" href="https://en.wikipedia.org/wiki/Thrissur">Thrissur</a>
+
+        </div>
+      </li>
+
+    </ul>
+
+          {% if user.is_authenticated %}
+                      <a style="margin-right: 15px;" class="btn-user" href="{% url 'welcome' %}">Hello {{user.username|upper}}</a>
+                      <a style="margin-right: 15px;" class="btn btn-home" href="{% url 'logout' %}">Logout</a>
+          {% else %}
+            <a style="margin-left:150px;" class="btn btn-home" href="{% url 'login' %}">Login</a>
+          {% endif %}
+
+
+
+
+
+<!--          <a class="dropdown-item" href="#">Another action</a>-->
+<!--          <div class="dropdown-divider"></div>-->
+<!--          <a class="dropdown-item" href="#">Something else here</a>-->
+
+  </div>
+</nav>

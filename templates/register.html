@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registration</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/googleapis.css' %}">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+{% block content %}
+<body>
+  <div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <h3 style="color:purple;text-align : center;top:10px;">Register Page</h3>
+
+        <form action="" class="register" method="post">
+          {% csrf_token %}
+          <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input type="text" class="login__input" name="username" placeholder="User name" required>
+          </div>
+          <div class="login__field">
+            <i class="login__icon fas fa-lock"></i>
+            <input type="password" class="login__input" name="password" placeholder="Password" required>
+          </div>
+          <div class="login__field">
+            <i class="login__icon fas fa-lock"></i>
+            <input type="password" class="login__input" name="cpassword" placeholder="Confirm Password" required>
+          </div>
+          <button type="submit" class="button login__submit">
+            <a> <span class="button__text">Register Now</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+            </a>
+          </button><br>
+          <a href="{% url 'login' %}" style="color:violet">Already have account</a>
+          <!-- Your HTML code -->
+          {% if messages %}
+            <ul class="messages">
+             {% for message in messages %}
+              <p style="color:red">{{ message }}</p>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+
+
+        </form>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}
+</html>

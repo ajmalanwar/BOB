@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Welcome to Bank of Bharat</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+
+     <div class="welcome-container">
+    <div class="shapes">
+      <div class="bank-shape"></div>
+      <div class="dollar-sign-shape"></div>
+    </div>
+    <div class="welcome-message">
+      {% if user.is_authenticated %}
+      <h1>Welcome {{user.username|upper}}</h1>
+      {% endif %}
+      <p>Welcome to our bank! We're here to serve you with excellence and provide you with a seamless banking experience.<br>
+        For better service and experience, please fill out our form.</p>
+      <a href="{% url 'form' %}" class="fill-form-button">Fill Form</a>
+    </div>
+
+    {% else %}
+    <div class="container">
+        <div class="shapes">
+            <div class="shape circle"></div>
+            <div class="shape triangle"></div>
+            <!-- You can add more shapes here -->
+        </div>
+        <div class="content">
+            <h1>Welcome to Bank of Bharat</h1>
+            <p>Enjoy our top-notch banking services!</p>
+            <a href="{% url 'login' %}" class="get-started-btn">Get Started</a>
+        </div>
+    </div>
+
+
+    {% endif %}
+{% endblock %}
+     </div>
+</body>
+</html>
